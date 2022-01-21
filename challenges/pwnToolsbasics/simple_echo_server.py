@@ -1,11 +1,22 @@
 import pwn
-import parse
+import re
 
 r = pwn.remote('35.195.130.106',
                17101,
                # ssl=True,
                )
 
-reply = r.readline().strip().decode()
+replies = [r.readline().decode() for i in range(3)]
 
-r.send(reply.split()[2])
+for sentance in replies:
+    print(sentance)
+
+for i in range(100):
+    print(f'Recieved {replies[-1]}, sending it back')
+    r.send(replies[-1])
+    replies.append(r.readline().decode())
+    if re.search(r'Well', replies[-1]):
+        break
+print()
+recieved = r.recvall()
+print(recieved)
