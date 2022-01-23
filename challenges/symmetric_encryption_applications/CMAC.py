@@ -4,12 +4,6 @@ import pwn
 import parse
 import hmac
 
-login = 'gandalfini'.encode()
-shared_secret = bytes.fromhex('23fb0c2087b7a315603464a695941a37ff7a03066d4f9ecebeda237e8a74be9e')
-
-
-
-
 r = pwn.remote('35.195.130.106',
                17015,
                # ssl=True,
